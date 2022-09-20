@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %} Home | Music Buddy {% endblock %}
+
+{% block content %}
+
+
+
+<center><h1> Home </h1><center>
+
+<div class="row">
+    <div class="column">
+        <h2 style="text-align: centered;">Today's Top Hits</h2>
+        {% for song in today %}  
+        <div class="dropdown">
+            <iframe src="https://open.spotify.com/embed/track/{{ song.id }}" width="80%" height="80" 
+            frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <!-- Kebab Menu Button -->
+            <button type="button" class="btn btn-secondary btnCenterHeight dropdown-toggle" id="dropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                  </svg>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdown1">                
+                {% include 'kebab_buttons.html' %}
+            </ul>
+        </div>
+        <br>
+
+        {% endfor %}
+    </div>
+
+    <div class="column">
+        <h2 style="text-align: centered;">Top Songs - Global</h2>
+        {% for song in global %}
+        <div class="dropdown">
+            <iframe src="https://open.spotify.com/embed/track/{{ song.id }}" width="80%" height="80" 
+            frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <!-- Kebab Menu Button -->
+            <button type="button" class="btn btn-secondary btnCenterHeight dropdown-toggle" id="dropdown2" data-bs-toggle="dropdown" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                  </svg>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdown2">
+                {% include 'kebab_buttons.html' %}
+            </ul>
+        </div>
+        <br>
+
+        {% endfor %}
+    </div>
+</div>
+
+<div style="margin-left: 4vh">
+{% include 'search_bar.html' %}
+</div>
+
+{% endblock %}

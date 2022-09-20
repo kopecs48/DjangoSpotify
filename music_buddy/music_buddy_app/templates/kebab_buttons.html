@@ -1,0 +1,8 @@
+{% block content %}
+
+<li><a class="dropdown-item like" href="#" value="{{ song.id }}">Like</a></li>
+<li><a class="dropdown-item dislike" href="#" value="{{ song.id }}">Dislike</a></li>
+<li><a class="dropdown-item comments" name="song_id" value="{{ song.id }}" href="{% url 'comments' song.id %}">Comments</a></li>
+
+    
+{% endblock %}

@@ -1,0 +1,3 @@
+CLIENT_ID = '2e345e9e14cf45ffae1a627656a4e4fc'
+CLIENT_SECRET = '6ef6256dedfd4e07bab6df2ea9f2faf2'
+REDIRECT_URI = 'http://127.0.0.1:8000/link'

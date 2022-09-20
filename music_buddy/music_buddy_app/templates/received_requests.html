@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ user.username }} Friends List | Music Buddy {% endblock %}
+
+{% block content %}
+
+<center> <h1> Friends List | Received Requests</h1> </center>
+
+<br>
+
+{% include 'friends_nav.html' %}
+
+<br>
+
+{% for user in incoming_req %}
+<div class="d-flex bd-highlight bg-light bg-gradient" style="--bs-bg-opacity: .05">
+    <a class="p-2 flex-grow-1 bd-highlight fs-4 text-info" style="text-decoration: none" href="{% url 'profile' user.from_user %}">{{ user.from_user }}</a>
+    <a role="button" class="p-2 bd-highlight fs-4 btn btn-primary accept" href="{% url 'accept_friend_request' user.id %}">Accept Friend Request</a> &nbsp;
+    <a role="button" class="p-2 bd-highlight fs-4 btn btn-danger decline" href="{% url 'decline_friend_request' user.id %}">Decline Friend Request</a>
+</div>
+<br>
+{% endfor %}
+
+{% endblock %}

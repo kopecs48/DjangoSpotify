@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ friend.username }} | Music Buddy {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<body>
+
+<div id="left" style="width: fit-content; margin-left: 2.5%;">
+    <img class="rounded-circle account-img" src="{{ friend.image.url }}">
+    <br><br>
+    {% if friend == user %}
+    <div style="width: fit-content;">
+      <a style="background-color:white; color: black;" class="btn btn-sm" href="/link" target="blank">Link to Spotify</a>
+    </div>
+    <br>
+    <div style="display: block; width: fit-content;">
+      <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label class="btn btn-sm" style="background-color:white; color: black;">
+        Change Picture<input type="file" style="display: none;" name="image" accept="image/*" id="id_image"> 
+      </label> 
+        <br><br> 
+        <button style="background-color:white; color: black;" class="btn btn-sm" type="submit">Save Picture</button>
+      </form>
+    </div>
+    {% endif %}
+</div>
+
+<div class="profile" style="margin-bottom: 10%;">
+    <h1 style="text-align:center;">{{ friend.username }}</h1>
+    <h5 style="text-align:center;"> {{ friend.liked_songs_total }} liked songs</h5>
+    {% if friend.liked_songs_total >= 5 %}
+    <img src="{% static '\achievements\lvl_1.jpg' %}" style="width: 60px; height: 60px;"/>
+    {% endif %}
+    {% if friend.liked_songs_total >= 15 %}
+    <img src="{% static '\achievements\lvl_2.png' %}" style="width: 60px; height: 60px;"/>
+    {% endif %}
+    {% if friend.liked_songs_total >= 25 %}
+    <img src="{% static '\achievements\lvl_3.png' %}" style="width: 60px; height: 60px;"/>
+    {% endif %}
+</div>
+
+<div id="right" style="border:solid white; padding:.5%; width: 15%; min-height: 300px; margin-right: 2%;">
+  <ul class="seperator"> <li><h4>Recently liked songs</h4></li>
+  {% if liked_songs %}
+    {% for liked in liked_songs %}
+        <li>
+          <a href="{% url 'comments' liked.id %}">{{ liked.name }}</a>
+
+        </li>
+    {% endfor %}
+  {% endif %}
+    </ul>
+</div>
+
+{% if playlists %}
+<div  style="margin-bottom: 5%;">
+<center><h1>Spotify Playlists</h1>
+<div class="accordion" id="accordionExample" style="overflow-y:scroll; height:400px;">  
+    {% for p in playlists %}
+        <div class="accordion-item" style="background-color: rgb(0, 0, 0);">
+            <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}" style="background-color: #181818;">
+                <p>{{ p.name }}</p>
+              </button>
+            </h2>
+            <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/{{ p.id }}" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+              </div>
+            </div>
+          </div>
+    {% endfor %}
+</div>
+</center>
+</div>
+{% endif %}
+<center>
+
+<div class="comments_block" style="width: auto;">
+  <h1 >Post a Comment:</h1>
+    <form method="POST">
+      {% csrf_token %}
+      <span>
+        <textarea name="body" cols="60" rows="5" maxlength="500" required id="id_body" style="resize:none"></textarea><br>
+        <center>
+            <div class="d-grid gap-2 col-6 mx-auto">                
+              <button style="background-color:white; color: black;" class="btn btn-outline-info " type="submit">Submit</button>
+            </div>
+      </center>
+    </span>
+      </form>
+      
+</div>
+</center>
+{% if posts %}
+<div class="comments_block" style="border: solid white; width: 80%;">
+<ul class="seperator">
+  {% for item in posts %}
+      <li style="font-size: 24px;">
+        <img class="rounded-circle account-img" src="{{ item.author.image.url }}" width="40" height="40">
+        {{ item }}
+        {% if user == item.author %}
+          <a style="font-size: 10px;" href="{% url 'delete_profile_comment' userID=friend.id prof_comment_id=item.id %}">delete comment</a>
+          <a style="font-size: 10px;" href="{% url 'edit_profile_comment' commentID=item.id %}">edit comment</a>
+        {% endif %}
+        <br>
+      </li>
+  {% endfor %}
+</ul>   
+</div> 
+<br>
+{% endif %}
+</body>
+
+
+
+
+
+{% endblock %}

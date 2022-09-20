@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}  | Music Buddy {% endblock %}
+
+{% block content %}
+<center>
+<body>
+    <div class="comments_block" style="width: auto;">
+        <h1 >Edit Comment:</h1>
+          <form method="POST">
+            {% csrf_token %}
+            <span>
+              <textarea name="body" cols="60" rows="5" maxlength="500" required id="id_body" style="resize:none">{{post.body}}</textarea><br>
+              <center>
+                  <div class="d-grid gap-2 col-6 mx-auto">                
+                    <button style="background-color:white; color: black;" class="btn btn-outline-info " type="submit">Submit</button>
+                  </div>
+            </center>
+          </span>
+            </form>
+            
+      </div>
+    </center>
+
+{% endblock %}

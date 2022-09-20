@@ -1,0 +1,37 @@
+/*
+https://stackoverflow.com/questions/52682812/django-css-not-updating
+If you add stuff to this CSS file, you need to do CTRL + F5 to load the new stuff if you did it properly
+to bypass the cache for the CSS
+*/
+
+/* Columns for front page */
+/* https://www.educative.io/edpresso/how-to-create-columns-in-html */
+
+.column {
+    float: left;
+    width: 50%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.btnCenterHeight {
+    position: relative;
+    bottom: 35px;
+}
+
+/* Larger Checkbox buttons for Liked Songs page */
+
+input.inputLarger {
+    width: 50px;
+    height: 50px;    
+}
+
+span.widget_loc {
+    padding-left:5%;
+    text-align:center;
+}
+

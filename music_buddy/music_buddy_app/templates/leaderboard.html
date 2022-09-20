@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} Leaderboard | Music Buddy {% endblock %}
+
+{% block content %}
+
+<h1> Leaderboard </h1>
+
+
+<div>
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Username</th>
+          <th scope="col">Songs Liked</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          
+          <td><a class="nav-link" href="{% url 'profile' user_name=user.username %}">{{ user.username }}</a></td>
+          <td>{{ user.liked_songs_total }}</td>
+        </tr>
+        {% endfor%}
+      </tbody>
+    </table>
+  </div>
+
+  
+
+
+{% endblock %}

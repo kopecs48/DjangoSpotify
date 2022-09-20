@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Liked Songs | Music Buddy{% endblock %}
+
+{% block content %}
+
+<h1 style="text-align:center;"> 
+    Liked Songs <br>
+</h1>
+
+<!-- Load the liked songs from the database-->
+{% if user.is_authenticated %}
+    {% if items %}
+    <form method='post'>
+        {% csrf_token %}
+        {% for x in items %}
+            <span class="widget_loc">
+                <input type="checkbox" class="inputLarger" value="{{ x }}" name="selection">&nbsp;
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/{{ x }}" width="80%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe><br>
+            </span>
+        {% endfor %}
+
+<div class="container" style="text-align:center;">
+    <br>
+    <span style="text-align:center">
+        <div class="d-grid gap-2">
+            <span>
+                <button type="submit" class="btn btn-success btn-lg" style="font-size:150%;" formaction="{% url 'export' %}">Save</button>
+                <button type="submit" class="btn btn-danger btn-lg" style="font-size:150%" formaction={% url 'delete' %}>Delete</button>
+            </span>
+        </div>
+    </span>
+</div>
+{% endif %} <!-- if items -->
+
+{% else %}
+    <h2 style="text-align:center;"> You need to be logged in </h2>
+{% endif %} <!-- user.is_authenticated -->
+
+{% endblock %}

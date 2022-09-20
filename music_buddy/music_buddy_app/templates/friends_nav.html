@@ -1,0 +1,11 @@
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link {% if 'friends' in request.path %} active " aria-current="page" {% else %} text-info " {% endif %} href="{% url 'friends' %}"">Current Friends </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if 'received' in request.path %} active " aria-current="page" {% else %} text-info " {% endif %} href="{% url 'received' %}"">Received Friend Requests</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if 'sent' in request.path %} active " aria-current="page" {% else %} text-info " {% endif %} href="{% url 'sent' %}"">Sent Friend Requests</a>      
+    </li>
+</ul>

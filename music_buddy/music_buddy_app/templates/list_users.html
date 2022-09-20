@@ -1,0 +1,9 @@
+<!-- Might be a little big, but should be used for user search page-->
+<!-- Remove bg elements and style if it looks weird -->
+{% for user in all_users %}
+<div class="d-flex bd-highlight bg-light bg-gradient" style="--bs-bg-opacity: .05">
+    <a class="p-2 flex-grow-1 bd-highlight fs-4 text-info" style="text-decoration: none" href="{% url 'profile' user.username %}">{{ user }}</a>
+    <a role="button" class="p-2 bd-highlight fs-4 btn btn-primary send" href="{% url 'send_friend_request' user.id %}">Send Friend Request</a>
+</div>
+<br>
+{% endfor %}

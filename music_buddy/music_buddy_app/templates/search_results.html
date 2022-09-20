@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %} Search for Music | Music Buddy {% endblock %}
+
+{% block content %}
+
+<div style="margin-left: 4vh">
+{% include 'search_bar.html' %}
+</div>
+
+{% if albums %}
+<table class="table">
+<tbody>
+<tr>
+<hr>
+<form method='post'>
+    {% csrf_token %}
+    <span>
+        {% for track in albums %}
+            <span style="text-align:center">
+                <label for="choices">
+                    <div>
+                    <iframe src="https://open.spotify.com/embed/track/{{ track.id }}" width="300" height="380" 
+                    frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    &nbsp;&nbsp;&nbsp;<br>
+                    <!-- Need to add button functionality later-->
+                    <!-- Make the buttons centered under each widget-->
+                    <div>
+                    {% include 'buttons.html' %}
+                    <br><br><br>
+                    </div>
+                    
+                    </div>
+                </label>                
+        {% endfor %}
+            </span>
+    </span>
+    </tr>
+    </tbody>
+</table>
+
+{% endif %}
+
+{% endblock %}

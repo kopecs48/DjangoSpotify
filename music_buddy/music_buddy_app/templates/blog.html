@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Blog | Music Buddy {% endblock %}
+{% block content %}
+<ul>
+<ul>
+{% block content %}
+{% for post in posts %}
+    <li>{{ post.title }} -  {{ post.author }} <br>
+        {{ post.body }}
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

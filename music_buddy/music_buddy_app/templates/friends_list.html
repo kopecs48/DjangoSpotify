@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ user.username }} Friends List | Music Buddy {% endblock %}
+
+{% block content %}
+
+<center> <h1> Friends List </h1> </center>
+
+<br>
+
+{% include 'friends_nav.html' %}
+
+<br>
+
+{% include 'list_users.html' %}
+
+<br>
+
+<h1>All Friends </h1>
+
+{% for friend in curr_friends %}
+<div class="d-flex bd-highlight bg-light bg-gradient" style="--bs-bg-opacity: .05">
+    <a class="p-2 flex-grow-1 bd-highlight fs-4 text-info" style="text-decoration: none" href="{% url 'profile' friend.username %}">{{ friend.username }}</a>
+    <a role="button" class="p-2 bd-highlight fs-4 btn btn-danger remove" href="{% url 'remove_friend' friend.id %}">Remove Friend</a>
+</div>
+<br>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+<!-- Christian Newman -->
+
+{% block title %} Recommendations | Music Buddy {% endblock %}
+
+{% block content %}
+
+<!-- Just some styling will throw out when css -->
+<div style="background-color:rgb(3, 3, 4);">
+<div>
+  <form method='post' action="{% url 'recommendationp' %}" style="background-color:rgb(83, 83, 83);">
+    {% csrf_token %}
+    <center>
+        <p class="fs-2">
+            <h1> Pick A Mood </h1>
+            <label>Genres</label>
+            {{ form.genre  }} 
+            <br><br>
+            <label>Danceability</label>
+            {{ form.danceability  }}
+            <label>Liveliness</label>
+            {{ form.liveliness  }}
+            <label>Acousticness</label>
+            {{ form.acousticness  }}
+            <label>Energy</label>
+            {{ form.energy  }}
+            <br><br>
+            <label>Use History?</label>
+            {{ form.history }}
+            <br>
+        </p>  
+	        <input type = "submit" value = "Submit" class="btn btn-dark btn-lg">
+    </center>
+        
+    <br>
+  </form>
+</div>
+
+<!--Checking to see if it's received form-->
+{% if albums %}
+<table class="table">
+<tbody>
+<tr>
+<hr>
+<form method='post'>
+    {% csrf_token %}
+    <span>
+        {% for track in albums %}
+            <span style="text-align:center">
+                <label for="choices">
+                    <div>
+                    <iframe src="https://open.spotify.com/embed/track/{{ track.id }}" width="300" height="380" 
+                    frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    &nbsp;&nbsp;&nbsp;<br>
+                    <div style="padding-right:5%">
+                    {% include 'buttons.html' %}
+                    <br><br><br>
+                    </div>
+                    
+                    </div>
+                </label>                
+        {% endfor %}
+            </span>
+        </span>
+    </tr>
+    </tbody>
+</table>
+{% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,8 @@
+{% block content %}
+
+<button type="button" class="btn btn-success btn-sm like" value="{{ track.id }}">Like</button>
+<button type="button" class="btn btn-danger btn-sm dislike" value="{{ track.id }}">Dislike</button>
+<a role="button" class="btn btn-secondary btn-sm comments" name="song_id" value="{{ track.id }}" href="{% url 'comments' track.id %}">Comments</a>
+
+
+{% endblock %}

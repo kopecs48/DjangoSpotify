@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-warning alert-dismissable" role="alert">
+            <button class="close" data-dismiss="alert">
+                <small><sup>x</sup></small>
+            </button>
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="container">
+    </br>
+    <form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <center><button style="background-color:white;" class="btn btn-outline-info" type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="/signup" target="blank"><strong>register here</strong></a>!</p></center>
+</div>
+{% endblock %}
